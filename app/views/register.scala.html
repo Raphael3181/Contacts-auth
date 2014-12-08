@@ -1,0 +1,16 @@
+@(regForm: Form[Login], error: Boolean)
+@main("Регистрация") {
+	@helper.form(routes.Auth.register()) {
+	<table align="center">
+		<tr><td>@inputtext(regForm("email"), "Email", if(error) {"email"} else {""}, 'type -> "email")</td></tr>
+		<tr><td>@inputtext(regForm("password"), "Пароль", "", 'type -> "password")</td></tr>
+		<tr>
+			<td style="text-align: right">
+			    <div class="form-group">
+					<input type="submit" class="btn btn-primary" value="Зарегистрироваться" />
+			    </div>
+			</td>
+		</tr>
+    </table>
+	}
+}

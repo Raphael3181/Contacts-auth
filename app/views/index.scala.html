@@ -1,0 +1,48 @@
+@(contacts: List[Contact], contactForm: Form[Contact])
+@import helper.form
+@main("Контакты") {
+<h2>@contacts.size() Контакт(а)(ов)</h2>
+<table class="table table-bordered table-striped table-condensed">
+	<thead style="font-weight:bold;">
+		<tr class="danger">
+			<td>Имя</td>
+			<td>Домашний телефон</td>
+			<td>Мобильный Телефон</td>
+			@if(session.get("email") != null) {
+			<td>Редактирование</td>
+			<td>Удаление</td>
+			}
+		</tr>
+	</thead>
+	@for(contact <- contacts) {
+	<tr>
+		<td>@contact.name</td>
+		<td>@contact.homephone</td>
+		<td>@contact.mobilephone</td>
+		@if(session.get("email") != null) {
+		<td>
+		@form(routes.Contacts.openContact(contact.id)) {
+			<input type="submit" value="Изменить" class="btn btn-success">
+		}
+		</td>
+		<td>
+		@form(routes.Contacts.deleteContact(contact.id)) {
+			<input type="submit" value="Удалить" class="btn btn-danger">
+		}
+		</td>
+		}
+	</tr>
+	}
+</table>
+@if(session.get("email") != null) {
+<h3>Добавьте новый контакт</h3>
+@form(routes.Contacts.newContact()) {
+<table align="center">
+	<tr><td>@inputtext(contactForm("name"), "Имя", "", 'placeholder -> "Введите имя")</td></tr>
+	<tr><td>@inputtext(contactForm("homephone"), "Домашний телефон", "", 'placeholder -> "Введите номер")</td></tr>
+	<tr><td>@inputtext(contactForm("mobilephone"), "Мобильный телефон", "", 'placeholder -> "Введите номер")</td></tr>
+	<tr><td><input type="submit" value="Ввести" class="btn btn-primary"></td></tr>
+</table>
+}
+}
+}

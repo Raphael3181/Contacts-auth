@@ -1,0 +1,13 @@
+@(contactForm: Form[Contact])
+@main("Редактирование") {
+<h2 align=center>Редактирование</h2>
+@helper.form(routes.Contacts.editContact()) {
+<input type="hidden" name="id" value="@contactForm("id").value">
+<table align="center">
+	<tr><td>@inputtext(contactForm("name"), "Имя", "")</td></tr>
+	<tr><td>@inputtext(contactForm("homephone"), "Домашний телефон", "")</td></tr>
+	<tr><td>@inputtext(contactForm("mobilephone"), "Мобильный Телефон", "")</td></tr>
+	<tr><td><input type="submit" value="Изменить" class="btn btn-success"></td></tr>
+</table>
+} 
+}

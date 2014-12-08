@@ -1,0 +1,28 @@
+@(title: String)(content: Html)
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("lib/bootstrap/css/bootstrap.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("lib/jquery/jquery.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("lib/bootstrap/js/bootstrap.js")" type="text/javascript"></script>
+    </head>
+    <body>
+		<nav class="navbar">
+			<a class="navbar-brand" href="@routes.Application.index()">Контакты</a>
+			@helper.form(if(session.get("email") == null) {routes.Auth.login()} else {routes.Auth.logout()}, 'class -> "navbar-form form-inline") {
+       		<div style="text-align:right">
+       		@if(session.get("email") == null) {
+			<a class="btn" href="@routes.Auth.register()">Регистрация</a>
+			} else {
+			<a class="btn">@session.get("email")</a>
+			}
+			<input type="submit" class="btn btn-primary" value="@if(session.get("email") == null) {Войти} else {Выйти}" />
+			</div>
+			}
+		</nav>
+		<div class="container">@content</div>
+    </body>
+</html>

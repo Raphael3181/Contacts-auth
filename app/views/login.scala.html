@@ -1,0 +1,17 @@
+@(loginForm: Form[Login], error: Boolean)
+@main("Вход") {
+	@helper.form(routes.Auth.auth()) {
+	<table align="center">
+		<tr><td>@inputtext(loginForm("email"), "Email", if(error) {"email"} else {""}, 'type -> "email")</td></tr>
+		<tr><td>@inputtext(loginForm("password"), "Пароль", "", 'type -> "password")</td></tr>
+		<tr>
+			<td style="text-align: right">
+				<div class="form-group">
+					<a href="@routes.Auth.signup()" class="btn">Зарегистрироваться</a>
+					<input type="submit" class="btn btn-primary" value="Войти" />
+			    </div>
+			</td>
+		</tr>
+    </table>
+	}
+}
